@@ -1,8 +1,8 @@
-module github.com/iacuity/datastore-connector
+module github.com/r14152/datastore-connector
 
 go 1.18
 
-replace github.com/iacuity/datastore-connector v1.0.0 => ../datastore-connector
+replace github.com/r14152/datastore-connector v1.0.0 => ../datastore-connector
 
 require github.com/aerospike/aerospike-client-go/v5 v5.8.0
 
