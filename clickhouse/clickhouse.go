@@ -11,7 +11,7 @@ import (
 )
 
 // ConnectionConnector return driver.Conn
-type ConnectionConnector struct {
+type ClickhouseConnector struct {
 	nativeConn driver.Conn
 }
 
@@ -56,7 +56,7 @@ func NewClickhouseConnector(cfg ClickhouseConfig) (*ClickhouseConnector, error) 
 	}, nil
 }
 
-func NewClickhouseDBConnector(cfg ClickhouseConfig) (*ClickhouseDBConnector, error) {
+func NewClickhouseDBConnector(cfg ClickhouseConfig) (*DBConnector, error) {
 	options := &clickhouse.Options{
 		Addr: []string{fmt.Sprintf("%s:%d", cfg.Host, cfg.Port)},
 		Auth: clickhouse.Auth{
@@ -71,7 +71,7 @@ func NewClickhouseDBConnector(cfg ClickhouseConfig) (*ClickhouseDBConnector, err
 
 	conn := clickhouse.OpenDB(options)
 
-	return &ClickhouseDBConnector{
+	return &DBConnector{
 		DBConn: conn,
 	}, nil
 }
@@ -82,8 +82,8 @@ func (conn *ClickhouseConnector) GetNativeConn() driver.Conn {
 
 // NewMockedClickHouseConnector return mockclient with setting client to given connection
 // its expected to provide mocked conn while calling this api
-func NewMockedClickHouseConnector(conn *sql.DB) *ClickhouseDBConnector {
-	return &ClickhouseDBConnector{
+func NewMockedClickHouseConnector(conn *sql.DB) *DBConnector {
+	return &DBConnector{
 		DBConn: conn,
 	}
 }
